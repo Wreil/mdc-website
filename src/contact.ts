@@ -45,9 +45,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             Products & Services
           </button>
           <div id="productsDropdown" class="products-dropdown nav-dropdown-menu" aria-label="Products and Services submenu">
-            <a href="/#products">EPC</a>
-            <a href="/#products">Products</a>
-            <a href="/#products">Other Services</a>
+            <a href="/epc.html">EPC</a>
+            <a href="/products.html">Products</a>
+            <a href="/other-services.html">Other Services</a>
           </div>
         </div>
         <div class="subsidiaries-nav-stack nav-dropdown-stack">
@@ -61,9 +61,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             Subsidiaries
           </button>
           <div id="subsidiariesDropdown" class="subsidiaries-dropdown nav-dropdown-menu" aria-label="Subsidiaries submenu">
-            <a href="/#subsidiaries">MDC ConQrete, Inc.</a>
-            <a href="/#subsidiaries">MDBI Construction Corporation</a>
-            <a href="/#subsidiaries">MDTK Corporation</a>
+            <a href="/mdc-conqrete.html">MDC ConQrete, Inc.</a>
+            <a href="/mdbi-construction.html">MDBI Construction Corporation</a>
+            <a href="/mdtk-corporation.html">MDTK Corporation</a>
           </div>
         </div>
         <div class="working-nav-stack nav-dropdown-stack">
@@ -77,15 +77,26 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             Working at MDC
           </button>
           <div id="workingDropdown" class="working-dropdown nav-dropdown-menu" aria-label="Working at MDC submenu">
-            <a href="/#culture" class="submenu-arrow">Our Culture</a>
-            <a href="/#culture">Learning and Development</a>
-            <a href="/#culture">Employee Engagement</a>
-            <a href="/#culture">Workforce Annual Report</a>
-            <a href="/#culture">Careers</a>
-          </div>
+            <div class="working-submenu-group">
+              <button
+                id="cultureToggle"
+                type="button"
+                class="working-submenu-toggle"
+                aria-expanded="false"
+                aria-controls="cultureSubmenu"
+              >
+                Our Culture
+              </button>
+              <div id="cultureSubmenu" class="working-submenu-links" aria-label="Our Culture submenu">
+                <a href="/learning-development.html">Learning and Development</a>
+                <a href="/employee-engagement.html">Employee Engagement</a>
+                <a href="/workforce-annual-report.html">Workforce Annual Report</a>
+              </div>
+            </div>
+                      <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQE-LbLj_KJaNQAAAZ24B1MI2z7OehBU3bCAb5r5yQE097zYUqk2x6u0M0DPM4xyL1b00Z-oaQRrJpWL1IErhFOh6EPZHg2GlLN1at9EUybx-swhjUVCCffDBA5YkFqTL5AcIAc=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fmakati-development-corporation%2F">Careers</a>
+</div>
         </div>
-        <a href="/#vendor">Vendor Accreditation</a>
-        <a href="/#news">News</a>
+        <a href="/vendor-accreditation.html">Vendor Accreditation</a>
         <a href="/contact.html" class="active">Contact Us</a>
       </nav>
     </div>
@@ -185,8 +196,16 @@ const nav = document.querySelector<HTMLElement>('#siteNav')
 const dropdownStacks = Array.from(document.querySelectorAll<HTMLElement>('.nav-dropdown-stack'))
 const dropdownTriggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.nav-dropdown-trigger'))
 const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#siteNav a'))
+const cultureToggle = document.querySelector<HTMLButtonElement>('#cultureToggle')
+const cultureSubmenu = document.querySelector<HTMLElement>('#cultureSubmenu')
+
+const closeCultureSubmenu = () => {
+  cultureSubmenu?.classList.remove('is-open')
+  cultureToggle?.setAttribute('aria-expanded', 'false')
+}
 
 const closeDropdowns = (exceptStack?: HTMLElement) => {
+  closeCultureSubmenu()
   dropdownStacks.forEach((stack) => {
     if (exceptStack && stack === exceptStack) {
       return
@@ -213,6 +232,13 @@ dropdownTriggers.forEach((trigger) => {
     stack.classList.toggle('is-open', shouldOpen)
     trigger.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false')
   })
+})
+
+cultureToggle?.addEventListener('click', (event) => {
+  event.stopPropagation()
+  const shouldOpen = !(cultureSubmenu?.classList.contains('is-open') ?? false)
+  cultureSubmenu?.classList.toggle('is-open', shouldOpen)
+  cultureToggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false')
 })
 
 document.addEventListener('click', (event) => {

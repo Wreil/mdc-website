@@ -1,6 +1,6 @@
 import './style.css'
 import { mountLogoLoader } from './pageLoader'
-import { historyContent } from './content/aboutUs/history'
+import { mdcConqreteContent } from './content/mdcConqrete'
 
 mountLogoLoader()
 
@@ -19,7 +19,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <button
             id="aboutToggle"
             type="button"
-            class="active has-dropdown about-nav-trigger nav-dropdown-trigger"
+            class="has-dropdown about-nav-trigger nav-dropdown-trigger"
             aria-expanded="false"
             aria-controls="aboutDropdown"
           >
@@ -55,14 +55,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <button
             id="subsidiariesToggle"
             type="button"
-            class="has-dropdown nav-dropdown-trigger"
+            class="active has-dropdown nav-dropdown-trigger"
             aria-expanded="false"
             aria-controls="subsidiariesDropdown"
           >
             Subsidiaries
           </button>
           <div id="subsidiariesDropdown" class="subsidiaries-dropdown nav-dropdown-menu" aria-label="Subsidiaries submenu">
-            <a href="/mdc-conqrete.html">MDC ConQrete, Inc.</a>
+            <a href="/mdc-conqrete.html" class="active">MDC ConQrete, Inc.</a>
             <a href="/mdbi-construction.html">MDBI Construction Corporation</a>
             <a href="/mdtk-corporation.html">MDTK Corporation</a>
           </div>
@@ -105,7 +105,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <main class="main-layout">
     <section class="about-page-shell reveal">
-      ${historyContent}
+      ${mdcConqreteContent}
     </section>
 
     <footer class="feature-footer reveal" id="contact">

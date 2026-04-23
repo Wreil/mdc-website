@@ -1,6 +1,6 @@
 import './style.css'
 import { mountLogoLoader } from './pageLoader'
-import { historyContent } from './content/aboutUs/history'
+import { epcContent } from './content/epc'
 
 mountLogoLoader()
 
@@ -19,7 +19,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <button
             id="aboutToggle"
             type="button"
-            class="active has-dropdown about-nav-trigger nav-dropdown-trigger"
+            class="has-dropdown about-nav-trigger nav-dropdown-trigger"
             aria-expanded="false"
             aria-controls="aboutDropdown"
           >
@@ -39,14 +39,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <button
             id="productsToggle"
             type="button"
-            class="has-dropdown nav-dropdown-trigger"
+            class="active has-dropdown nav-dropdown-trigger"
             aria-expanded="false"
             aria-controls="productsDropdown"
           >
             Products & Services
           </button>
           <div id="productsDropdown" class="products-dropdown nav-dropdown-menu" aria-label="Products and Services submenu">
-            <a href="/epc.html">EPC</a>
+            <a href="/epc.html" class="active">EPC</a>
             <a href="/products.html">Products</a>
             <a href="/other-services.html">Other Services</a>
           </div>
@@ -105,7 +105,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <main class="main-layout">
     <section class="about-page-shell reveal">
-      ${historyContent}
+      ${epcContent}
     </section>
 
     <footer class="feature-footer reveal" id="contact">

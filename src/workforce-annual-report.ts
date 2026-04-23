@@ -1,6 +1,6 @@
 import './style.css'
 import { mountLogoLoader } from './pageLoader'
-import { historyContent } from './content/aboutUs/history'
+import { workforceAnnualReportContent } from './content/workforceAnnualReport'
 
 mountLogoLoader()
 
@@ -19,7 +19,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <button
             id="aboutToggle"
             type="button"
-            class="active has-dropdown about-nav-trigger nav-dropdown-trigger"
+            class="has-dropdown about-nav-trigger nav-dropdown-trigger"
             aria-expanded="false"
             aria-controls="aboutDropdown"
           >
@@ -71,7 +71,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <button
             id="workingToggle"
             type="button"
-            class="has-dropdown nav-dropdown-trigger"
+            class="active has-dropdown nav-dropdown-trigger"
             aria-expanded="false"
             aria-controls="workingDropdown"
           >
@@ -94,8 +94,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
                 <a href="/workforce-annual-report.html">Workforce Annual Report</a>
               </div>
             </div>
-                      <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQE-LbLj_KJaNQAAAZ24B1MI2z7OehBU3bCAb5r5yQE097zYUqk2x6u0M0DPM4xyL1b00Z-oaQRrJpWL1IErhFOh6EPZHg2GlLN1at9EUybx-swhjUVCCffDBA5YkFqTL5AcIAc=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fmakati-development-corporation%2F">Careers</a>
-</div>
+            <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQE-LbLj_KJaNQAAAZ24B1MI2z7OehBU3bCAb5r5yQE097zYUqk2x6u0M0DPM4xyL1b00Z-oaQRrJpWL1IErhFOh6EPZHg2GlLN1at9EUybx-swhjUVCCffDBA5YkFqTL5AcIAc=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fmakati-development-corporation%2F">Careers</a>
+          </div>
         </div>
         <a href="/vendor-accreditation.html">Vendor Accreditation</a>
         <a href="/contact.html">Contact Us</a>
@@ -105,7 +105,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <main class="main-layout">
     <section class="about-page-shell reveal">
-      ${historyContent}
+      ${workforceAnnualReportContent}
     </section>
 
     <footer class="feature-footer reveal" id="contact">

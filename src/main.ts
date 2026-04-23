@@ -5,25 +5,16 @@ mountLogoLoader()
 
 const galleryItems = [
   {
-    title: 'Makati SkyRise Facade Works',
-    location: 'Makati City',
-    image: '/CTBv2_rs.jpg',
+    title: 'People at MDC',
+    location: 'Our Workforce',
+    image: '/Gemini_Generated_Image_1k4ixe1k4ixe1k4i_nobg.png',
   },
-  {
-    title: 'Urban Rail Utility Structures',
-    location: 'Metro Manila',
-    image: '/DJI_0018-1.jpg',
-  },
-  {
-    title: 'Commercial Podium Buildout',
-    location: 'Taguig City',
-    image: '/IMG_0319-1.jpg',
-  },
-  {
-    title: 'Transit-Oriented Mixed-Use Zone',
-    location: 'Quezon City',
-    image: '/IMG_0503.jpg',
-  },
+]
+
+const preFeaturedItems = [
+  { src: '/IMG_0319-1.jpg', alt: 'MDC project highlight 319' },
+  { src: '/IMG_0503.jpg', alt: 'MDC project highlight 503' },
+  { src: '/IMG_0588-1536x1024.jpg', alt: 'MDC project highlight 588' },
 ]
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -68,9 +59,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             Products & Services
           </button>
           <div id="productsDropdown" class="products-dropdown nav-dropdown-menu" aria-label="Products and Services submenu">
-            <a href="#products">EPC</a>
-            <a href="#products">Products</a>
-            <a href="#products">Other Services</a>
+            <a href="/epc.html">EPC</a>
+            <a href="/products.html">Products</a>
+            <a href="/other-services.html">Other Services</a>
           </div>
         </div>
         <div class="subsidiaries-nav-stack nav-dropdown-stack">
@@ -84,9 +75,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             Subsidiaries
           </button>
           <div id="subsidiariesDropdown" class="subsidiaries-dropdown nav-dropdown-menu" aria-label="Subsidiaries submenu">
-            <a href="#subsidiaries">MDC ConQrete, Inc.</a>
-            <a href="#subsidiaries">MDBI Construction Corporation</a>
-            <a href="#subsidiaries">MDTK Corporation</a>
+            <a href="/mdc-conqrete.html">MDC ConQrete, Inc.</a>
+            <a href="/mdbi-construction.html">MDBI Construction Corporation</a>
+            <a href="/mdtk-corporation.html">MDTK Corporation</a>
           </div>
         </div>
         <div class="working-nav-stack nav-dropdown-stack">
@@ -100,15 +91,26 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             Working at MDC
           </button>
           <div id="workingDropdown" class="working-dropdown nav-dropdown-menu" aria-label="Working at MDC submenu">
-            <a href="#culture" class="submenu-arrow">Our Culture</a>
-            <a href="#culture">Learning and Development</a>
-            <a href="#culture">Employee Engagement</a>
-            <a href="#culture">Workforce Annual Report</a>
-            <a href="#culture">Careers</a>
-          </div>
+            <div class="working-submenu-group">
+              <button
+                id="cultureToggle"
+                type="button"
+                class="working-submenu-toggle"
+                aria-expanded="false"
+                aria-controls="cultureSubmenu"
+              >
+                Our Culture
+              </button>
+              <div id="cultureSubmenu" class="working-submenu-links" aria-label="Our Culture submenu">
+                <a href="/learning-development.html">Learning and Development</a>
+                <a href="/employee-engagement.html">Employee Engagement</a>
+                <a href="/workforce-annual-report.html">Workforce Annual Report</a>
+              </div>
+            </div>
+                      <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQE-LbLj_KJaNQAAAZ24B1MI2z7OehBU3bCAb5r5yQE097zYUqk2x6u0M0DPM4xyL1b00Z-oaQRrJpWL1IErhFOh6EPZHg2GlLN1at9EUybx-swhjUVCCffDBA5YkFqTL5AcIAc=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fmakati-development-corporation%2F">Careers</a>
+</div>
         </div>
-        <a href="#vendor">Vendor Accreditation</a>
-        <a href="#news">News</a>
+        <a href="/vendor-accreditation.html">Vendor Accreditation</a>
         <a href="/contact.html">Contact Us</a>
       </nav>
     </div>
@@ -167,22 +169,47 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     </section>
 
-    <footer class="feature-footer reveal" id="news">
-      <div class="feature-footer-inner">
-        <div class="featured-post-block hero-copy feature-copy">
-          <p class="eyebrow feature-label">Featured Post</p>
-          <h2>MDBI enters Railway Infrastructure with MMSP Bulk Supply Substation (BSS) Groundbreaking</h2>
-          <p class="news-date">May 21, 2025</p>
-          <p>
-            On May 5, 2025, MDBI Construction Corp. participated in the groundbreaking ceremony for the Bulk Supply
-            Substation (BSS) of the Metro Manila Subway Project (MMSP) held in Valenzuela City. The milestone event was attended by key officials from the Department of Transportation (DOTr), led by Secretary Vince Dizon, Valenzuela City Mayor Wes Gatchalian, and representatives from the project consortium.
-          </p>
+    <section class="pre-featured-gallery reveal" aria-label="Project image highlights">
+      <div class="pre-featured-gallery-inner">
+        <div class="pre-featured-stage">
+          <img
+            id="preFeaturedBack"
+            src="${preFeaturedItems[1].src}"
+            alt="${preFeaturedItems[1].alt}"
+            class="pre-featured-image pre-featured-image-back"
+          />
+          <img
+            id="preFeaturedSlide"
+            src="${preFeaturedItems[0].src}"
+            alt="${preFeaturedItems[0].alt}"
+            class="pre-featured-image pre-featured-image-front"
+          />
         </div>
+        <div class="pre-featured-controls" aria-label="Project image highlights slides">
+          <button id="preFeaturedPrev" type="button" class="pre-featured-arrow" aria-label="Previous highlight">‹</button>
+          <div id="preFeaturedDots" class="pre-featured-dots" aria-label="Project image highlight slides"></div>
+          <button id="preFeaturedNext" type="button" class="pre-featured-arrow" aria-label="Next highlight">›</button>
+        </div>
+        <article class="featured-post-content" aria-label="Featured post">
+          <p class="featured-post-label">Featured posts</p>
+          <h3 class="featured-post-title">MDBI enters Railway Infrastructure with MMSP Bulk Supply Substation (BSS) Groundbreaking</h3>
+          <p class="featured-post-date">May 21, 2025</p>
+          <p class="featured-post-summary">
+            On May 5, 2025, MDBI Construction Corp. participated in the groundbreaking ceremony for the Bulk Supply
+            Substation (BSS) of the Metro Manila Subway Project (MMSP) held in Valenzuela City. The milestone event
+            was attended by key officials from the Department of Transportation (DOTr), led by Secretary Vince Dizon,
+            Valenzuela City Mayor Wes Gatchalian, representatives from the [...]
+          </p>
+        </article>
+      </div>
+    </section>
 
-        <div class="footer-links-grid">
+    <footer class="feature-footer reveal" id="contact">
+      <div class="feature-footer-inner">
+                <div class="footer-links-grid">
           <div>
             <p class="footer-title">Quick Links</p>
-            <p>News</p>
+            
             <p>Careers</p>
             <p>Contact Us</p>
             <p>Terms of Use</p>
@@ -218,12 +245,21 @@ const prevBtn = document.querySelector<HTMLButtonElement>('#prevBtn')
 const nextBtn = document.querySelector<HTMLButtonElement>('#nextBtn')
 const menuToggle = document.querySelector<HTMLButtonElement>('#menuToggle')
 const nav = document.querySelector<HTMLElement>('#siteNav')
+const preFeaturedSlideElement = document.querySelector<HTMLImageElement>('#preFeaturedSlide')
+const preFeaturedBackElement = document.querySelector<HTMLImageElement>('#preFeaturedBack')
+const preFeaturedDotsElement = document.querySelector<HTMLDivElement>('#preFeaturedDots')
+const preFeaturedPrevButton = document.querySelector<HTMLButtonElement>('#preFeaturedPrev')
+const preFeaturedNextButton = document.querySelector<HTMLButtonElement>('#preFeaturedNext')
 const dropdownStacks = Array.from(document.querySelectorAll<HTMLElement>('.nav-dropdown-stack'))
 const dropdownTriggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.nav-dropdown-trigger'))
 const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#siteNav a'))
+const cultureToggle = document.querySelector<HTMLButtonElement>('#cultureToggle')
+const cultureSubmenu = document.querySelector<HTMLElement>('#cultureSubmenu')
 
 let currentIndex = 0
 let autoSlideTimer: number | undefined
+let preFeaturedIndex = 0
+let preFeaturedAutoSlideTimer: number | undefined
 
 const setActiveDot = (index: number) => {
   const dots = Array.from(dotsElement?.querySelectorAll<HTMLButtonElement>('[data-slide-dot]') ?? [])
@@ -235,6 +271,13 @@ const setActiveDot = (index: number) => {
 
 const renderDots = () => {
   if (!dotsElement) {
+    return
+  }
+
+  if (galleryItems.length <= 1) {
+    dotsElement.innerHTML = ''
+    prevBtn?.setAttribute('hidden', 'true')
+    nextBtn?.setAttribute('hidden', 'true')
     return
   }
 
@@ -295,6 +338,85 @@ const restartAutoPlay = () => {
   }, 4000)
 }
 
+const setPreFeaturedSlide = (index: number) => {
+  if (!preFeaturedSlideElement) {
+    return
+  }
+
+  preFeaturedIndex = (index + preFeaturedItems.length) % preFeaturedItems.length
+  const currentItem = preFeaturedItems[preFeaturedIndex]
+  const backItem = preFeaturedItems[(preFeaturedIndex + 1) % preFeaturedItems.length]
+
+  preFeaturedSlideElement.classList.add('is-fading')
+  preFeaturedBackElement?.classList.add('is-fading')
+
+  window.setTimeout(() => {
+    preFeaturedSlideElement.src = currentItem.src
+    preFeaturedSlideElement.alt = currentItem.alt
+    preFeaturedSlideElement.classList.remove('is-fading')
+
+    if (preFeaturedBackElement) {
+      preFeaturedBackElement.src = backItem.src
+      preFeaturedBackElement.alt = backItem.alt
+      preFeaturedBackElement.classList.remove('is-fading')
+    }
+
+    const dots = Array.from(preFeaturedDotsElement?.querySelectorAll<HTMLButtonElement>('[data-pre-featured-dot]') ?? [])
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle('is-active', dotIndex === preFeaturedIndex)
+      dot.setAttribute('aria-selected', dotIndex === preFeaturedIndex ? 'true' : 'false')
+    })
+  }, 180)
+}
+
+const startPreFeaturedAutoPlay = () => {
+  if (preFeaturedItems.length <= 1) {
+    return
+  }
+
+  if (preFeaturedAutoSlideTimer !== undefined) {
+    window.clearInterval(preFeaturedAutoSlideTimer)
+  }
+
+  preFeaturedAutoSlideTimer = window.setInterval(() => {
+    setPreFeaturedSlide(preFeaturedIndex + 1)
+  }, 2800)
+}
+
+const renderPreFeaturedDots = () => {
+  if (!preFeaturedDotsElement) {
+    return
+  }
+
+  if (preFeaturedItems.length <= 1) {
+    preFeaturedDotsElement.innerHTML = ''
+    preFeaturedPrevButton?.setAttribute('hidden', 'true')
+    preFeaturedNextButton?.setAttribute('hidden', 'true')
+    return
+  }
+
+  preFeaturedDotsElement.innerHTML = preFeaturedItems
+    .map(
+      (_, index) => `
+        <button
+          type="button"
+          class="pre-featured-dot${index === 0 ? ' is-active' : ''}"
+          aria-label="Go to highlight ${index + 1}"
+          aria-selected="${index === 0 ? 'true' : 'false'}"
+          data-pre-featured-dot
+        ></button>
+      `,
+    )
+    .join('')
+
+  Array.from(preFeaturedDotsElement.querySelectorAll<HTMLButtonElement>('[data-pre-featured-dot]')).forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      setPreFeaturedSlide(index)
+      startPreFeaturedAutoPlay()
+    })
+  })
+}
+
 prevBtn?.addEventListener('click', () => {
   setSlide(currentIndex - 1)
   restartAutoPlay()
@@ -305,7 +427,23 @@ nextBtn?.addEventListener('click', () => {
   restartAutoPlay()
 })
 
+preFeaturedPrevButton?.addEventListener('click', () => {
+  setPreFeaturedSlide(preFeaturedIndex - 1)
+  startPreFeaturedAutoPlay()
+})
+
+preFeaturedNextButton?.addEventListener('click', () => {
+  setPreFeaturedSlide(preFeaturedIndex + 1)
+  startPreFeaturedAutoPlay()
+})
+
+const closeCultureSubmenu = () => {
+  cultureSubmenu?.classList.remove('is-open')
+  cultureToggle?.setAttribute('aria-expanded', 'false')
+}
+
 const closeDropdowns = (exceptStack?: HTMLElement) => {
+  closeCultureSubmenu()
   dropdownStacks.forEach((stack) => {
     if (exceptStack && stack === exceptStack) {
       return
@@ -334,6 +472,13 @@ dropdownTriggers.forEach((trigger) => {
   })
 })
 
+cultureToggle?.addEventListener('click', (event) => {
+  event.stopPropagation()
+  const shouldOpen = !(cultureSubmenu?.classList.contains('is-open') ?? false)
+  cultureSubmenu?.classList.toggle('is-open', shouldOpen)
+  cultureToggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false')
+})
+
 document.addEventListener('click', (event) => {
   const clickedInsideDropdown = dropdownStacks.some((stack) => stack.contains(event.target as Node))
 
@@ -358,3 +503,6 @@ navLinks.forEach((link) => {
 renderDots()
 setSlide(0)
 restartAutoPlay()
+renderPreFeaturedDots()
+setPreFeaturedSlide(0)
+startPreFeaturedAutoPlay()
