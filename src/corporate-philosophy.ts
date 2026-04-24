@@ -1,5 +1,6 @@
 import './style.css'
 import { mountLogoLoader } from './pageLoader'
+import { footerMarkup, initializeFooterQuickLinks } from './footer'
 import { corporatePhilosophyContent } from './content/aboutUs/corporatePhilosophy'
 
 mountLogoLoader()
@@ -108,34 +109,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       ${corporatePhilosophyContent}
     </section>
 
-    <footer class="feature-footer reveal" id="contact">
-      <div class="feature-footer-inner">
-                <div class="footer-links-grid">
-          <div>
-            <p class="footer-title">Quick Links</p>
-                        <p>Careers</p>
-            <p>Contact Us</p>
-            <p>Terms of Use</p>
-            <p>Privacy Notice</p>
-          </div>
-          <div>
-            <p class="footer-title">Social</p>
-            <p>Facebook</p>
-            <p>Instagram</p>
-            <p>LinkedIn</p>
-          </div>
-          <div>
-            <p class="footer-title">Contact Us</p>
-            <p>Makati Development Corporation</p>
-            <p>Email: info@mdc.example</p>
-            <p>Phone: +63 2 0000 0000</p>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copy-container">
-        <p class="footer-copy">Copyright © 2026 Makati Development Corporation. All rights reserved.</p>
-      </div>
-    </footer>
+    ${footerMarkup}
   </main>
 `
 
@@ -209,3 +183,5 @@ navLinks.forEach((link) => {
     menuToggle?.setAttribute('aria-expanded', 'false')
   })
 })
+
+initializeFooterQuickLinks()

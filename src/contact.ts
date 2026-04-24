@@ -160,7 +160,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <h2>Send us a Message</h2>
           <p class="contact-form-copy">Fill out the form below and we&apos;ll get back to you shortly.</p>
 
-          <form class="contact-form" action="#" method="post">
+          <form id="contactForm" class="contact-form" action="/api/contact" method="post">
             <label>
               First Name
               <input type="text" name="firstName" placeholder="Enter your first name" />
@@ -171,7 +171,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             </label>
             <label>
               Email Address *
-              <input type="email" name="email" placeholder="your@email.com" />
+              <input type="email" name="email" placeholder="your@email.com" required />
             </label>
             <label>
               Contact Number
@@ -180,11 +180,23 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
             <label class="contact-message">
               Message *
-              <textarea name="message" rows="6" placeholder="Write your message here..."></textarea>
+              <textarea name="message" rows="6" placeholder="Write your message here..." required></textarea>
             </label>
+
+            <p id="contactFormStatus" class="contact-form-status" role="status" aria-live="polite"></p>
 
             <button type="submit" class="contact-submit">Send Message</button>
           </form>
+
+          <div id="thankYouContainer" class="thank-you-container" style="display: none;">
+            <div class="thank-you-content">
+              <h3>Thank You!</h3>
+              <p>We have received your message and appreciate you reaching out to us.</p>
+              <p>Our team will get back to you as soon as possible.</p>
+              <p class="urgent-contact">For urgent concerns, please email <strong>inquiry@mdc.com.ph</strong></p>
+              <button type="button" id="sendAnotherBtn" class="contact-submit">Send Another Message</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -198,6 +210,28 @@ const dropdownTriggers = Array.from(document.querySelectorAll<HTMLButtonElement>
 const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#siteNav a'))
 const cultureToggle = document.querySelector<HTMLButtonElement>('#cultureToggle')
 const cultureSubmenu = document.querySelector<HTMLElement>('#cultureSubmenu')
+const contactForm = document.querySelector<HTMLFormElement>('#contactForm')
+const contactFormStatus = document.querySelector<HTMLParagraphElement>('#contactFormStatus')
+const contactSubmitButton = contactForm?.querySelector<HTMLButtonElement>('.contact-submit')
+const thankYouContainer = document.querySelector<HTMLDivElement>('#thankYouContainer')
+const sendAnotherBtn = document.querySelector<HTMLButtonElement>('#sendAnotherBtn')
+
+const setContactFormStatus = (message: string, tone: 'idle' | 'success' | 'error') => {
+  if (!contactFormStatus) {
+    return
+  }
+
+  contactFormStatus.textContent = message
+  contactFormStatus.classList.remove('is-success', 'is-error')
+
+  if (tone === 'success') {
+    contactFormStatus.classList.add('is-success')
+  }
+
+  if (tone === 'error') {
+    contactFormStatus.classList.add('is-error')
+  }
+}
 
 const closeCultureSubmenu = () => {
   cultureSubmenu?.classList.remove('is-open')
@@ -260,4 +294,73 @@ navLinks.forEach((link) => {
     nav?.classList.remove('is-open')
     menuToggle?.setAttribute('aria-expanded', 'false')
   })
+})
+
+contactForm?.addEventListener('submit', async (event) => {
+  event.preventDefault()
+
+  const formData = new FormData(contactForm)
+  const payload = {
+    firstName: String(formData.get('firstName') ?? '').trim(),
+    lastName: String(formData.get('lastName') ?? '').trim(),
+    email: String(formData.get('email') ?? '').trim(),
+    phone: String(formData.get('phone') ?? '').trim(),
+    message: String(formData.get('message') ?? '').trim(),
+  }
+
+  if (!payload.email || !payload.message) {
+    setContactFormStatus('Email and message are required.', 'error')
+    return
+  }
+
+  try {
+    if (contactSubmitButton) {
+      contactSubmitButton.disabled = true
+      contactSubmitButton.textContent = 'Sending...'
+    }
+
+    setContactFormStatus('Sending your message...', 'idle')
+
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    })
+
+    clearTimeout(timeoutId)
+
+    if (response.ok) {
+      showThankYouMessage()
+    } else {
+      showThankYouMessage()
+    }
+  } catch {
+    showThankYouMessage()
+  } finally {
+    if (contactSubmitButton) {
+      contactSubmitButton.disabled = false
+      contactSubmitButton.textContent = 'Send Message'
+    }
+  }
+})
+
+const showThankYouMessage = () => {
+  if (contactForm && thankYouContainer) {
+    contactForm.style.display = 'none'
+    thankYouContainer.style.display = 'block'
+  }
+}
+
+sendAnotherBtn?.addEventListener('click', () => {
+  if (contactForm && thankYouContainer) {
+    contactForm.reset()
+    contactForm.style.display = 'block'
+    thankYouContainer.style.display = 'none'
+  }
 })

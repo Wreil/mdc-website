@@ -1,5 +1,6 @@
 import './style.css'
 import { mountLogoLoader } from './pageLoader'
+import { footerMarkup, initializeFooterQuickLinks } from './footer'
 
 mountLogoLoader()
 
@@ -190,49 +191,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <div id="preFeaturedDots" class="pre-featured-dots" aria-label="Project image highlight slides"></div>
           <button id="preFeaturedNext" type="button" class="pre-featured-arrow" aria-label="Next highlight">›</button>
         </div>
-        <article class="featured-post-content" aria-label="Featured post">
-          <p class="featured-post-label">Featured posts</p>
-          <h3 class="featured-post-title">MDBI enters Railway Infrastructure with MMSP Bulk Supply Substation (BSS) Groundbreaking</h3>
-          <p class="featured-post-date">May 21, 2025</p>
-          <p class="featured-post-summary">
-            On May 5, 2025, MDBI Construction Corp. participated in the groundbreaking ceremony for the Bulk Supply
-            Substation (BSS) of the Metro Manila Subway Project (MMSP) held in Valenzuela City. The milestone event
-            was attended by key officials from the Department of Transportation (DOTr), led by Secretary Vince Dizon,
-            Valenzuela City Mayor Wes Gatchalian, representatives from the [...]
-          </p>
-        </article>
       </div>
     </section>
 
-    <footer class="feature-footer reveal" id="contact">
-      <div class="feature-footer-inner">
-                <div class="footer-links-grid">
-          <div>
-            <p class="footer-title">Quick Links</p>
-            
-            <p>Careers</p>
-            <p>Contact Us</p>
-            <p>Terms of Use</p>
-            <p>Privacy Notice</p>
-          </div>
-          <div>
-            <p class="footer-title">Social</p>
-            <p>Facebook</p>
-            <p>Instagram</p>
-            <p>LinkedIn</p>
-          </div>
-          <div>
-            <p class="footer-title">Contact Us</p>
-            <p>Makati Development Corporation</p>
-            <p>Email: info@mdc.example</p>
-            <p>Phone: +63 2 0000 0000</p>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copy-container">
-        <p class="footer-copy">Copyright © 2026 Makati Development Corporation. All rights reserved.</p>
-      </div>
-    </footer>
+    ${footerMarkup}
 
   </main>
 `
@@ -250,6 +212,7 @@ const preFeaturedBackElement = document.querySelector<HTMLImageElement>('#preFea
 const preFeaturedDotsElement = document.querySelector<HTMLDivElement>('#preFeaturedDots')
 const preFeaturedPrevButton = document.querySelector<HTMLButtonElement>('#preFeaturedPrev')
 const preFeaturedNextButton = document.querySelector<HTMLButtonElement>('#preFeaturedNext')
+const featuredPostElement = document.querySelector<HTMLElement>('.featured-post-content')
 const dropdownStacks = Array.from(document.querySelectorAll<HTMLElement>('.nav-dropdown-stack'))
 const dropdownTriggers = Array.from(document.querySelectorAll<HTMLButtonElement>('.nav-dropdown-trigger'))
 const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('#siteNav a'))
@@ -260,6 +223,8 @@ let currentIndex = 0
 let autoSlideTimer: number | undefined
 let preFeaturedIndex = 0
 let preFeaturedAutoSlideTimer: number | undefined
+
+featuredPostElement?.remove()
 
 const setActiveDot = (index: number) => {
   const dots = Array.from(dotsElement?.querySelectorAll<HTMLButtonElement>('[data-slide-dot]') ?? [])
@@ -506,3 +471,5 @@ restartAutoPlay()
 renderPreFeaturedDots()
 setPreFeaturedSlide(0)
 startPreFeaturedAutoPlay()
+
+initializeFooterQuickLinks()
